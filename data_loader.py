@@ -109,7 +109,11 @@ class CovidDataLoader:
 
 if __name__ == "__main__":
     loader = CovidDataLoader()
-    loader.load_from_csv('owid-covid-data-old.csv')
+    loader.load_from_csv('owid-covid-data.csv')
+    countrydata = loader.country_data('USA')
+    countrydata.to_csv('country_data.csv',index = False)
+    grouping_data = loader.get_global_total()
+    grouping_data.to_csv('Global_data.csv',index = False)
     icu_cols = [col for col in loader.df.columns if 'icu' in col.lower() or 'hosp' in col.lower() or 'million' in col.lower()]
 
     if icu_cols:
